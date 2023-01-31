@@ -101,6 +101,10 @@ class PokerHand
   #
   # - In a Straight, or a Flush, or a Straight flush, all card values will be
   #   returned, from highest to lowest, with no particular grouping.
+  #
+  # In another words, an untie is made when comparing two PokerHand#untie_group,
+  # number by number. Hand is winner if any of these values is higher than the
+  # other.
   def untie_group
     values = card_values.reverse
 
