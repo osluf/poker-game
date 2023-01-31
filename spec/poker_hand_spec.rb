@@ -138,7 +138,7 @@ RSpec.describe PokerHand do
       end
     end
 
-    context 'when there is no draw scenario' do
+    context 'when there is no tie scenario' do
       context 'when "flush" vs "four of a kind"' do
         subject { described_class.new(%w[9H 9H 7H 2H 3H]) }
         let(:other) { described_class.new(%w[7H KC 7S 7S 7D]) }
@@ -147,7 +147,7 @@ RSpec.describe PokerHand do
       end
     end
 
-    context 'when in a draw, but one hand has higher score' do
+    context 'when in a tie, but one hand has higher score' do
       context 'when in a :straight_flush' do
         subject { described_class.new(%w[4H AH 2H 3H 5H]) }
         let(:other) { described_class.new(%w[3H 2H 5H 4H 6H]) }
@@ -301,7 +301,7 @@ RSpec.describe PokerHand do
       end
     end
 
-    context 'when in a draw' do
+    context 'when in a tie' do
       context 'when in a :straight_flush' do
         subject { described_class.new(%w[4H AH 2H 3H 5H]) }
         let(:other) { described_class.new(%w[3H 2H 5H 4H AH]) }

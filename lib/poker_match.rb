@@ -9,19 +9,19 @@ class PokerMatch
   # Reads the poker.txt file and prints the summary of winners.
   def self.print_summary
     file = File.open('lib/poker.txt')
-    score = { 1 => 0, 2 => 0, draw: 0 }
+    score = { 1 => 0, 2 => 0, tie: 0 }
 
     file.readlines.each do |hands_line|
       hands = hands_line.split(' ')
       res = new(PokerHand.new(hands[0..4]), PokerHand.new(hands[5..])).result
 
-      res[:draw] ? score[:draw] += 1 : score[res[:winner]] += 1
+      res[:tie] ? score[:tie] += 1 : score[res[:winner]] += 1
     end
 
     puts '---'
     puts "Player 1 wins: #{score[1]}"
     puts "Player 2 wins: #{score[2]}"
-    puts "Draws: #{score[:draw]}"
+    puts "Ties: #{score[:tie]}"
     puts '---'
   end
 
@@ -36,7 +36,7 @@ class PokerMatch
     elsif @hand1 < @hand2
       { winner: 2, rank: @hand2.rank_key }
     else
-      { winner: nil, rank: :draw }
+      { winner: nil, rank: :tie }
     end
   end
 end

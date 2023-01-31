@@ -10,7 +10,7 @@ RSpec.describe PokerMatch do
           ---
           Player 1 wins: 376
           Player 2 wins: 624
-          Draws: 0
+          Ties: 0
           ---
         OUTPUT
       ).to_stdout
@@ -21,11 +21,11 @@ RSpec.describe PokerMatch do
   describe '#result' do
     subject { described_class.new(hand1, hand2).result }
 
-    context 'when it is a complete draw' do
+    context 'when it is a complete tie' do
       let(:hand1) { PokerHand.new(%w[9H 9C 7C 2H 3H]) }
       let(:hand2) { PokerHand.new(%w[3H 2C 7S 9S 9D]) }
 
-      it { is_expected.to eq(winner: nil, rank: :draw) }
+      it { is_expected.to eq(winner: nil, rank: :tie) }
     end
 
     context 'when player 1 wins' do

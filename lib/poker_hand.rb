@@ -92,7 +92,7 @@ class PokerHand
   #   Therefore this method will return [2, 5].
   #
   # - In a Two Pairs scenario (e.g. 2 2 3 3 5), the strongest pair wins,
-  #   but there might still be room for a subsequent draw, therefore this
+  #   but there might still be room for a subsequent tie, therefore this
   #   method will return [3, 2, 5], where 5 is a called a "kick" card,
   #   which is still relevant for the "untie".
   #
