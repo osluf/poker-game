@@ -77,7 +77,7 @@ class PokerHand
     # Untie: The first side to win the comparison is the winner
     # in an "untie" situation. If there's still no winner, it's
     # a complete tie (in real poker, winners would split the pot).
-    comp_group.zip(other.comp_group).each do |n1, n2|
+    untie_group.zip(other.untie_group).each do |n1, n2|
       return 1 if n1 > n2
       return -1 if n2 > n1
     end
@@ -101,8 +101,12 @@ class PokerHand
   #
   # - In a Straight, or a Flush, or a Straight flush, all card values will be
   #   returned, from highest to lowest, with no particular grouping.
-  def comp_group
+  def untie_group
     values = card_values.reverse
+
+    # Don't bother with any grouping logic if it's either a Straight (any of them),
+    # or Flush. It's just not needed for checking which card is higher (see comments).
+    return values if straight? || flush?
 
     values
       .group_by { |c| values.count(c) }

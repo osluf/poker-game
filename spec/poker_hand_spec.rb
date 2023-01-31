@@ -167,6 +167,19 @@ RSpec.describe PokerHand do
         it { is_expected.to be > other }
         it { expect(subject.rank_key).to eq(:flush) }
         it { expect(other.rank_key).to eq(:flush) }
+
+        context 'when opponent hand has a pair' do
+          # Opponent has two A's, but it won't be considered a pair
+          # in the untie.
+          subject { described_class.new(%w[5H 4H 2H AH AH]) }
+
+          # A's high card.
+          let(:other) { described_class.new(%w[5H 4H 9H AH 3H]) }
+
+          it { is_expected.to be > other }
+          it { expect(subject.rank_key).to eq(:flush) }
+          it { expect(other.rank_key).to eq(:flush) }
+        end
       end
 
       context 'when in a :straight' do
