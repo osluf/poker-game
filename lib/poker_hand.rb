@@ -63,6 +63,11 @@ class PokerHand
     @hand = hand.map { _1.split('') }.sort_by(&:first)
   end
 
+  # This method officially make PokerHand objects comparable/sortable,
+  #
+  # It considers a hand can have a higher rank than another, and also
+  # figures out how to "untie" same rank situations (like two flushes,
+  # or two fullhouses, etc).
   def <=>(other)
     result = rank_number <=> other.rank_number
 
